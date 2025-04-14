@@ -16,46 +16,55 @@ This project implements a leaf classification system with both backend machine l
 ## Directory Structure
 
 
-leaf-classification/
-├── backend/                # Flask API server
-│   ├── app.py              # Main API implementation
-│   ├── requirements.txt    # Backend dependencies
-│   └── uploads/            # Temporary storage for uploaded images
-│
-├── frontend/               # React frontend application
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ImageUpload.jsx  # Image upload component
-│   │   │   ├── ResultsDisplay.jsx  # Results display component
-│   │   │   └── ModelSelection.jsx  # Model selection component
-│   │   └── App.jsx         # Main application component
-│   └── ...
-│
-├── data/                   # Data directory
-│   ├── raw/                # Original dataset files
-│   │   ├── train.csv       # Training data with features
-│   │   └── test.csv        # Test data with features
-│   └── processed/          # Processed data files
-│
-├── models/                 # Trained model storage
-│   ├── knn/                # KNN model files
-│   ├── svm/                # SVM model files
-│   ├── decision_tree/      # Decision Tree model files
-│   ├── random_forest/      # Random Forest model files
-│   ├── ann/                # Artificial Neural Network model files
-│   ├── scaler.pkl          # Feature scaler
-│   ├── label_encoder.pkl   # Label encoder
-│   └── pca_reducer.pkl/lda_reducer.pkl  # Dimension reduction model
-│
-├── src/                    # Source code for model training
-│   ├── data_preprocessing.py  # Data preprocessing functions
-│   ├── feature_extraction.py  # Feature extraction utilities
-│   ├── model_training.py   # Model training functions
-│   ├── evaluation.py       # Model evaluation metrics
-│   └── main.py             # Main script for training models
-│
-├── requirements.txt        # Project dependencies
-└── README.md               # Project documentation
+```yaml
+leaf-classification:
+  backend:
+    # Flask API server
+    app.py:                         # Main API implementation
+    requirements.txt:               # Backend dependencies
+    uploads: {}                     # Temporary storage for uploaded images
+
+  frontend:
+    # React frontend application
+    src:
+      components:
+        ImageUpload.jsx:            # Image upload component
+        ResultsDisplay.jsx:         # Results display component
+        ModelSelection.jsx:         # Model selection component
+      App.jsx:                      # Main application component
+    other-files: ...                # Other frontend files/configs
+
+  data:
+    # Data directory
+    raw:
+      train.csv:                    # Training data with features
+      test.csv:                     # Test data with features
+    processed: {}                   # Processed data files
+
+  models:
+    # Trained model storage
+    knn: {}
+    svm: {}
+    decision_tree: {}
+    random_forest: {}
+    ann: {}
+    scaler.pkl:                    # Feature scaler
+    label_encoder.pkl:             # Label encoder
+    pca_reducer.pkl:               # PCA model
+    lda_reducer.pkl:               # LDA model
+
+  src:
+    # Source code for model training
+    data_preprocessing.py:          # Data preprocessing functions
+    feature_extraction.py:          # Feature extraction utilities
+    model_training.py:              # Model training functions
+    evaluation.py:                  # Model evaluation metrics
+    main.py:                        # Main script for training models
+
+  requirements.txt:                 # Project dependencies
+  README.md:                        # Project documentation
+```
+
 
 
 ## Setup Instructions
