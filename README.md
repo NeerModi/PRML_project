@@ -1,87 +1,176 @@
-# Leaf Classification Project
+# Leaf Classification System
 
-This project aims to classify leaf images into different species using various machine learning techniques.
+A machine learning project that classifies leaf images into different species using multiple classification models.
 
 ## Project Overview
 
-This repository contains an implementation of multiple machine learning models for leaf species classification based on the Kaggle dataset: https://www.kaggle.com/competitions/leaf-classification
+This project implements a leaf classification system with both backend machine learning models and a frontend web interface. Users can upload images of leaves, and the system will identify the species using one of several machine learning models.
+
+## Features
+
+- Multiple machine learning models for leaf classification (KNN, SVM, Decision Tree, Random Forest, ANN)
+- Image feature extraction for shape, texture, and margin characteristics
+- Web interface for easy leaf image upload and analysis
+- Real-time prediction and species identification
 
 ## Directory Structure
 
-```
+
 leaf-classification/
+├── backend/                # Flask API server
+│   ├── app.py              # Main API implementation
+│   ├── requirements.txt    # Backend dependencies
+│   └── uploads/            # Temporary storage for uploaded images
 │
-├── data/                      # Data directory
-│   ├── raw/                   # Original dataset files
-│   └── processed/             # Processed data files
+├── frontend/               # React frontend application
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ImageUpload.jsx  # Image upload component
+│   │   │   ├── ResultsDisplay.jsx  # Results display component
+│   │   │   └── ModelSelection.jsx  # Model selection component
+│   │   └── App.jsx         # Main application component
+│   └── ...
 │
-├── models/                    # Trained model storage
-│   ├── knn/
-│   ├── svm/
-│   ├── decision_tree/
-│   ├── random_forest/
-│   ├── ann/
-│   └── cnn/
+├── data/                   # Data directory
+│   ├── raw/                # Original dataset files
+│   │   ├── train.csv       # Training data with features
+│   │   └── test.csv        # Test data with features
+│   └── processed/          # Processed data files
 │
-├── notebooks/                 # Jupyter notebooks
-│   ├── exploratory_data_analysis.ipynb
-│   ├── feature_engineering.ipynb
-│   └── model_training_evaluation.ipynb
+├── models/                 # Trained model storage
+│   ├── knn/                # KNN model files
+│   ├── svm/                # SVM model files
+│   ├── decision_tree/      # Decision Tree model files
+│   ├── random_forest/      # Random Forest model files
+│   ├── ann/                # Artificial Neural Network model files
+│   ├── scaler.pkl          # Feature scaler
+│   ├── label_encoder.pkl   # Label encoder
+│   └── pca_reducer.pkl/lda_reducer.pkl  # Dimension reduction model
 │
-├── src/                       # Source code
-│   ├── __init__.py
+├── src/                    # Source code for model training
 │   ├── data_preprocessing.py  # Data preprocessing functions
 │   ├── feature_extraction.py  # Feature extraction utilities
-│   ├── model_training.py      # Model training functions
-│   ├── evaluation.py          # Model evaluation metrics
-│   └── visualization.py       # Visualization utilities
+│   ├── model_training.py   # Model training functions
+│   ├── evaluation.py       # Model evaluation metrics
+│   └── main.py             # Main script for training models
 │
-├── results/                   # Results and comparison analysis
-│   ├── metrics/               # Performance metrics
-│   ├── visualizations/        # Visualization outputs
-│   └── failure_analysis/      # Failure case analysis
-│
-├── requirements.txt           # Project dependencies
-└── README.md                  # Project documentation
-```
+├── requirements.txt        # Project dependencies
+└── README.md               # Project documentation
+
 
 ## Setup Instructions
 
-1. Clone this repository:
-```
-git clone https://github.com/yourusername/leaf-classification.git
-cd leaf-classification
-```
+### Prerequisites
 
-2. Create and activate a virtual environment (optional but recommended):
-```
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+- Python 3.8+
+- Node.js and npm
+- Git
 
-3. Install the required packages:
-```
-pip install -r requirements.txt
-```
+### Backend Setup
 
-4. Download the dataset from Kaggle: https://www.kaggle.com/competitions/leaf-classification
-   - Place the files in the `data/raw/` directory
-   - Make sure you have train.csv, test.csv, and the images folder
+1. Clone the repository:
+   bash
+   git clone https://github.com/yourusername/leaf-classification.git
+   cd leaf-classification
+   
 
-5. Run the notebooks in the `notebooks/` directory or execute the main script:
-```
-python src/main.py
-```
+2. Create a virtual environment and activate it:
+   bash
+   python -m venv venv
+   
+   # On Windows:
+   venv\Scripts\activate
+   
+   # On Unix/macOS:
+   source venv/bin/activate
+   
+
+3. Install backend dependencies:
+   bash
+   cd backend
+   pip install -r requirements.txt
+   
+
+4. Run the Flask API server:
+   bash
+   python app.py
+   
+
+   The server will start on http://localhost:5000
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   bash
+   cd ../frontend
+   
+
+2. Install frontend dependencies:
+   bash
+   npm install
+   
+
+3. Start the development server:
+   bash
+   npm start
+   
+
+   The frontend will be available at http://localhost:3000
+
+## Dataset
+
+The project uses the Leaf Classification dataset from Kaggle ([https://www.kaggle.com/competitions/leaf-classification](https://www.kaggle.com/competitions/leaf-classification)). The dataset contains:
+
+- Margin, shape, and texture features for various leaf species
+- Images of leaf samples
+- 99 species of plants represented
 
 ## Models Implemented
 
-1. K-Nearest Neighbors (KNN)
-2. Support Vector Machine (SVM)
-3. Decision Tree
-4. Random Forest
-5. Artificial Neural Network (ANN)
-6. Convolutional Neural Network (CNN)
+1. *K-Nearest Neighbors (KNN)*
+   - Fast classification based on similarity metrics
 
-## Results
+2. *Support Vector Machine (SVM)*
+   - High accuracy with good generalization capability
+   - Optimal hyperplane for classification in high-dimensional space
 
-The model performance comparison and analysis can be found in the `results/` directory after running the code.
+3. *Decision Tree (DT)*
+   - Simple interpretable model for leaf classification
+
+4. *Random Forest (RF)*
+   - Ensemble method with improved robustness and accuracy
+
+5. *Artificial Neural Network (ANN)*
+   - Deep learning approach for complex feature relationships
+
+## Feature Extraction
+
+The system extracts three types of features from leaf images:
+
+1. *Shape Features*: Using elliptic Fourier descriptors
+2. *Texture Features*: Using Local Binary Patterns (LBP)
+3. *Margin Features*: Based on distance from centroid along the contour
+
+## Usage
+
+1. Open the web interface at http://localhost:3000
+2. Upload a leaf image through the interface
+3. The system will process the image and extract relevant features
+4. The selected model will classify the leaf species
+5. Results will display the predicted species name and confidence level
+
+## Troubleshooting
+
+- If models return consistent class numbers (e.g., always class 19 or 64), check the label encoding between training and inference
+- Verify that the feature extraction process matches between training and inference
+- Ensure all preprocessing tools (scaler, reducer) are properly loaded
+
+## Technologies Used
+
+- *Backend*: Flask, TensorFlow, scikit-learn, OpenCV
+- *Frontend*: React, TailwindCSS
+- *Data Processing*: NumPy, Pandas, scikit-image
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
